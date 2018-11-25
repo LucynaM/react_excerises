@@ -8,7 +8,17 @@ class Card extends Component {
             showDetails: false,
         };
     }
+
+    
+    toggleDetails() {
+        // change state on click
+        this.setState({showDetails: !this.state.showDetails});
+    }
+
     render() {
+        // set cardDetails variable 
+        // undefined if state.showDetails is false, 
+        // containing div with checkList if state.showDetails is true  
         let cardDetails;
         if (this.state.showDetails) {
             cardDetails = (
@@ -18,11 +28,14 @@ class Card extends Component {
                 </div>
             )
         }
+
         return (
+            // change className if state.showDetails is true
+            // set onClick event 
             <div className="card">
-                <div className="card__title" onClick={
-                    () => this.setState({showDetails: !this.state.showDetails}) 
-                }> {this.props.title} 
+                <div className={this.state.showDetails ? "card__title card__title--is-open" : "card__title"} 
+                onClick={this.toggleDetails.bind(this)}> 
+                    {this.props.title} 
                 </div>
                 {cardDetails}
             </div> 
